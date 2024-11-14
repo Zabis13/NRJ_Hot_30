@@ -1,6 +1,8 @@
 library(shiny)
 library(rvest)
 
+
+
 # UI
 ui <- fluidPage(
   titlePanel("Плей-лист Радио Energy"),
@@ -29,7 +31,9 @@ server <- function(input, output) {
   
   # Изначальное сообщение
   output$result <- renderUI({
-    tags$p("Нажмите на кнопку для выполнения скрипта.")
+    tags$p("Приложение предназначено для получения списка треков 
+           ENERGY GLOBAL CHART и дальнейшего их копирования в свой плейлист
+           через www.tunemymusic.com")
   })
   
   # Обработчик нажатия кнопки
@@ -108,12 +112,14 @@ server <- function(input, output) {
         tags$p(paste("Извлечение треков:", timings()$timing_extract_songs, "мс")),
         tags$p(paste("Сохранение результатов:", timings()$timing_save_result, "мс")),
         tags$p(paste("Время отрисовки:", timings()$timing_render, "мс")),
-        tags$p(tags$b(paste("Общее время выполнения:", total_time(), "мс")))
+        tags$p(tags$b(paste("Общее время выполнения:", total_time(), "мс"))),
+        tags$p(tags$a(href = "https://www.tunemymusic.com/ru", "Сюда можно загрузить плей-лист"))
       )
     } else {
       tags$p("Время выполнения (мс)")
     }
   })
+  
 }
 
 # Запуск приложения
